@@ -1,5 +1,5 @@
 Project Summary
-Not final: Testing the speeds and efficiency of different shortest path algorithms. 
+A simple c++ program that uses HashTables to display responses for a simple Eliza Chatbot AI.
 
 How to Run
 N/A
