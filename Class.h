@@ -25,9 +25,9 @@ public:
     int hashSum(std::string);
     void insertResp(std::string, std::string);
     void insertName(std::string);
-    void findResp(std::string);
-    void printResp();
-    int randNum(int);
+    LizaKey* findResp(std::string);
+    void displayResp(std::string);
+    int randNum(std::string);
     void printAllResps();
 protected:
 private:
