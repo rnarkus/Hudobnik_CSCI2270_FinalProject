@@ -18,4 +18,4 @@ Contributors
 N/A
 
 Open issues/bugs
-N/A
+When adding in an extra response and the printing out, seg fault. Pretty are it is how I implemented my function in Class.cpp
