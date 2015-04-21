@@ -1,6 +1,7 @@
 #include "Class.h"
 #include <iostream>
 #include <cstring>
+#include <time.h>
 #include <vector>
 
 using namespace std;
@@ -53,7 +54,21 @@ void Prog::insertResp(string in_keyword, string in_response){
     	entry->next= newNode;
     }
 }
-/*LizaKey * Prog::findResp(string in_keyword){
+
+int Prog::randNum(string in_keyword){
+	int hash = hashSum(in_keyword);
+	srand(time(NULL));
+	int randomIndex = rand() % hashResp[hash]->response.size();
+	return randomIndex;
+}
+
+void Prog::displayResp(string in_keyword){
+	int index = randNum(in_keyword);
+	LizaKey *found = findResp(in_keyword);
+	cout << found->response[index] << endl;
+}
+
+LizaKey * Prog::findResp(string in_keyword){
 	int i = hashSum(in_keyword);
 	LizaKey* found = NULL;
 	LizaKey* front = hashResp[i];
@@ -63,7 +78,7 @@ void Prog::insertResp(string in_keyword, string in_response){
 		}
 		if(hashResp[i]->next != NULL){
 			while(hashResp[i]->next != NULL){
-				if((*hashResp[i]).next->title == in_title){
+				if((*hashResp[i]).next->keyword == in_keyword){
 					found = (*hashResp[i]).next;
 				}
 				hashResp[i] = (*hashResp[i]).next;
@@ -76,6 +91,7 @@ void Prog::insertResp(string in_keyword, string in_response){
 	hashResp[i]= front;
 	return found;
 }
+/*
 void Prog::deleteMovie(string in_title){
 	int hash = hashSum(in_title);
 	bool check = true;
