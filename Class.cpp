@@ -114,23 +114,22 @@ void Prog::deleteMovie(string in_title){
 void Prog::printAllResps(){
 	bool empty = true;
 	for (int i = 0; i < ARRAY_SIZE; i++){
-		LizaKey *head = hashResp[i];
-		if (hashResp[i] != NULL){
-			cout << "~~~" <<(*hashResp[i]).keyword << "~~~" << endl;
-			for (int j = 0; j < (*hashResp[i]).response.size(); j++){
-				cout << (*hashResp[i]).response[j] << endl;
+		LizaKey *entry = hashResp[i];
+		if (entry != NULL){
+			cout << "~~~" <<(*entry).keyword << "~~~" << endl;
+			for (int j = 0; j < (*entry).response.size(); j++){
+				cout << (*entry).response[j] << endl;
 			}
 			empty = false;
-			if(hashResp[i]->next != NULL){
-				while(hashResp[i]->next != NULL){
-					cout << "~~~" <<(*hashResp[i]).next->keyword << "~~~" << endl;
-					for (int k = 0; i < (*hashResp[i]).next->response.size(); k++){
-						cout << (*hashResp[i]).next->response[k] << endl;
+			if(entry->next != NULL){
+				while(entry->next != NULL){
+					cout << "~~~" <<(*entry).next->keyword << "~~~" << endl;
+					for (int k = 0; i < (*entry).next->response.size(); k++){
+						cout << (*entry).next->response[k] << endl;
 					}
 					empty = false;
-					hashResp[i] = (*hashResp[i]).next;
+					entry = (*entry).next;
 				}
-				hashResp[i] = head;
 			}
 		}
 	}
