@@ -20,4 +20,4 @@ Contributors
 N/A
 
 Open issues/bugs
-When adding in an extra response and then printing out, seg fault. Pretty sure it is just how I implemented my function in Class.cpp.
+When adding in an extra response and then printing out, seg fault. Pretty sure it is just how I implemented my function in Class.cpp. Updated, but still having same issues. 
