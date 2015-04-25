@@ -91,15 +91,15 @@ LizaKey * Prog::findResp(string in_keyword){
 	hashResp[i]= front;
 	return found;
 }
-/*
-void Prog::deleteMovie(string in_title){
-	int hash = hashSum(in_title);
+
+void Prog::deleteKey(string keyword){
+	int hash = hashSum(keyword);
 	bool check = true;
-	Movie *entry = hashResp[hash];
+	LizaKey *entry = hashResp[hash];
 	while(entry->next != NULL){
 		check = false;
-		if (entry->next->title == in_title){
-			Movie * temp = entry->next;
+		if (entry->next->keyword == keyword){
+			LizaKey *temp = entry->next;
 			entry->next = entry->next->next;
 			delete temp;
 		}
@@ -110,7 +110,8 @@ void Prog::deleteMovie(string in_title){
 	if (entry->next == NULL  && check == true){
 		hashResp[hash] = NULL;
 	}
-}*/
+}
+
 void Prog::printAllResps(){
 	bool empty = true;
 	for (int i = 0; i < ARRAY_SIZE; i++){

@@ -26,11 +26,11 @@ int main(){
 	
 	while (input != "quit"){
 		cin >> input;
-			if (input == "1"){
+		if (input == "1"){
 			displayOptions(resp);
-		
-	}
-		
+		}
+
+
 	}
 	cout << "Goodbye!" << endl;
 }
@@ -38,11 +38,12 @@ int main(){
 void displayOptions(Prog& resp){
 	string input2, in_keyword, in_response;
 
-	while(input2 != "3"){
+	while(input2 != "4"){
 	cout << "=====Options:=====" << endl;
 	cout << "1. Enter in extra responses for BOB to learn" << endl;
 	cout << "2. Print all Keywords and their responses" << endl;
-	cout << "3. Quit and return to program" << endl;
+	cout << "3. Delete a keyword" << endl;
+	cout << "4. Quit and return to program" << endl;
 		cin >> input2;
 		if (input2 == "1"){
 			cin.ignore();
@@ -56,11 +57,17 @@ void displayOptions(Prog& resp){
 		else if (input2 == "2"){
 			resp.printAllResps();
 		}
+		else if (input2 == "3"){
+			cin.ignore();
+			cout << "Type in keyword to delete:" << endl;
+			getline(cin, in_keyword);
+			resp.deleteKey(in_keyword);
+		}
 	}
 }
 
 void displayLogo(){
-	int DELAY = 300000;
+	int DELAY = 200000;
 	cout<<"	   BBBBBBB   OOOOOOOO   BBBBBBB	   "<<endl;
 	usleep(DELAY);
 	cout<<"	   B     B   O      O   B     B	   "<<endl;
