@@ -27,6 +27,7 @@ public:
     void insertName(std::string);
     LizaKey* findResp(std::string);
     void deleteKey(std::string);
+    void deleteResp(std::string, int);
     void displayResp(std::string);
     int randNum(std::string);
     void printAllResps();

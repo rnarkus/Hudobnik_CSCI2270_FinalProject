@@ -112,6 +112,10 @@ void Prog::deleteKey(string keyword){
 	}
 }
 
+void Prog::deleteResp(string in_keyword, int index){
+
+}
+
 void Prog::printAllResps(){
 	bool empty = true;
 	for (int i = 0; i < ARRAY_SIZE; i++){
@@ -119,14 +123,14 @@ void Prog::printAllResps(){
 		if (entry != NULL){
 			cout << "~~~" <<(*entry).keyword << "~~~" << endl;
 			for (int j = 0; j < (*entry).response.size(); j++){
-				cout << (*entry).response[j] << endl;
+				cout << j <<". "<<(*entry).response[j] << endl;
 			}
 			empty = false;
 			if(entry->next != NULL){
 				while(entry->next != NULL){
 					cout << "~~~" <<(*entry).next->keyword << "~~~" << endl;
 					for (int k = 0; i < (*entry).next->response.size(); k++){
-						cout << (*entry).next->response[k] << endl;
+						cout << k <<". "<<(*entry).next->response[k] << endl;
 					}
 					empty = false;
 					entry = (*entry).next;
