@@ -3,6 +3,7 @@
 #include <cstring>
 #include <time.h>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -64,31 +65,27 @@ int Prog::randNum(string in_keyword){
 
 void Prog::displayResp(string in_keyword){
 	int index = randNum(in_keyword);
-	LizaKey *found = findResp(in_keyword);
+	LizaKey *found = findKey(in_keyword);
 	cout << found->response[index] << endl;
 }
 
-LizaKey * Prog::findResp(string in_keyword){
+LizaKey * Prog::findKey(string in_keyword){
 	int i = hashSum(in_keyword);
 	LizaKey* found = NULL;
-	LizaKey* front = hashResp[i];
-	if (hashResp[i] != NULL){
-		if(hashResp[i]->keyword == in_keyword){
-			found = &(*hashResp[i]);
+	LizaKey* entry = hashResp[i];
+	if (entry != NULL){
+		if(entry->keyword == in_keyword){
+			found = &(*entry);
 		}
-		if(hashResp[i]->next != NULL){
-			while(hashResp[i]->next != NULL){
-				if((*hashResp[i]).next->keyword == in_keyword){
-					found = (*hashResp[i]).next;
+		if(entry->next != NULL){
+			while(entry->next != NULL){
+				if((*entry).next->keyword == in_keyword){
+					found = (*entry).next;
 				}
-				hashResp[i] = (*hashResp[i]).next;
+				entry = (*entry).next;
 			}
 		}
 	}
-	else{
-		cout << "not found" << endl;
-	}
-	hashResp[i]= front;
 	return found;
 }
 
@@ -113,7 +110,58 @@ void Prog::deleteKey(string keyword){
 }
 
 void Prog::deleteResp(string in_keyword, int index){
+	LizaKey *found = findKey(in_keyword);
+	if (found == NULL){
+		cout << "Keyword not found" << endl;
+	}
+	else if (index > found->response.size() || index < 0){
+		cout << "Index not found" << endl;
+	}
+	else{
+		found->response.erase(found->response.begin()+index-1);
+		cout << "Deleted response at index " << index << endl;
+	}
+}
 
+void Prog::searchStr(string sentence){
+	// search through each word in sentence 
+	// output response based on keyword found
+	istringstream iss (sentence);
+	getline(iss, ranks, ' ');
+}
+
+void Prog::printResp(string in_keyword){
+	LizaKey *found = findKey(in_keyword);
+	if (found == NULL){
+		cout << "Keyword not found" << endl;
+	}
+	else{
+		for (int j = 0; j < (*found).response.size(); j++){
+			cout << j <<". "<<(*found).response[j] << endl;
+		}
+	}
+}
+
+void Prog::printKey(){
+	cout << "Keywords:" << endl;
+	bool empty = true;
+	for (int i = 0; i < ARRAY_SIZE; i++){
+		LizaKey *entry = hashResp[i];
+		if (entry != NULL){
+			cout <<(*entry).keyword <<endl;
+			empty = false;
+			if(entry->next != NULL){
+				while(entry->next != NULL){
+					cout << (*entry).next->keyword << endl;
+					empty = false;
+					entry = (*entry).next;
+				}
+			}
+		}
+	}
+	if (empty == true){
+		cout << "empty" << endl;
+	}
 }
 
 void Prog::printAllResps(){
