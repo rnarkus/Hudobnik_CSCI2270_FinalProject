@@ -11,8 +11,8 @@ struct LizaKey
 
     LizaKey(){};
 
-    LizaKey(std::string in_keyword, std::string in_reponse){
-        response.push_back(in_reponse);
+    LizaKey(std::string in_keyword, std::string in_response){
+        response.push_back(in_response);
         keyword = in_keyword;
     }
 };
@@ -25,11 +25,14 @@ public:
     int hashSum(std::string);
     void insertResp(std::string, std::string);
     void insertName(std::string);
-    LizaKey* findResp(std::string);
+    LizaKey* findKey(std::string);
     void deleteKey(std::string);
     void deleteResp(std::string, int);
     void displayResp(std::string);
+    void searchStr(std::string);
     int randNum(std::string);
+    void printResp(std::string);
+    void printKey();
     void printAllResps();
 protected:
 private:
