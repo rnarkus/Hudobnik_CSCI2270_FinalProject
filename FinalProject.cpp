@@ -15,7 +15,7 @@ int main(){
 	resp.insertResp("greet", "Welcome, what is your name?");
 	resp.insertResp("greet", "Welcome, what the cluck is your name?");
 	resp.insertResp("greet", "Hello, my name is BOB, what is your name?");
-	resp.insertResp("greet", "My name is BOB, What can I do for you today?");
+	resp.insertResp("greet", "My name is BOB, what is your name?");
 
 	resp.displayResp("greet");
 	cin >> name;
@@ -25,25 +25,28 @@ int main(){
 	resp.displayResp("name");
 	
 	while (input != "quit"){
-		cin >> input;
+		cin.ignore();
+		getline(cin, input);
 		if (input == "1"){
 			displayOptions(resp);
 		}
-
-
+		else{
+			resp.searchStr(input);
+		}
 	}
 	cout << "Goodbye!" << endl;
 }
 
 void displayOptions(Prog& resp){
 	string input2, in_keyword, in_response;
-
-	while(input2 != "4"){
+	int index;
+	while(input2 != "5"){
 	cout << "=====Options:=====" << endl;
 	cout << "1. Enter in extra responses for BOB to learn" << endl;
 	cout << "2. Print all Keywords and their responses" << endl;
 	cout << "3. Delete a keyword" << endl;
-	cout << "4. Quit and return to program" << endl;
+	cout << "4. Delete a Response" << endl;
+	cout << "5. Quit and return to program" << endl;
 		cin >> input2;
 		if (input2 == "1"){
 			cin.ignore();
@@ -63,11 +66,30 @@ void displayOptions(Prog& resp){
 			getline(cin, in_keyword);
 			resp.deleteKey(in_keyword);
 		}
+		else if (input2 == "4"){
+			cin.ignore();
+			resp.printKey();
+			cout << "Type in keyword to find the response you want to delete:" << endl;
+			cin >> in_keyword;
+			LizaKey *found = resp.findKey(in_keyword);
+			while (found == NULL){
+				cout << "Try a different keyword" << endl;
+				cin >> in_keyword;
+				found = resp.findKey(in_keyword);
+			}
+			if (found != NULL){
+				resp.printResp(in_keyword);
+				cout << "Type in the number of the response you would like to delete" << endl;
+				cin >> index;
+				resp.deleteResp(in_keyword, index);
+			}
+		}
+			
 	}
 }
 
 void displayLogo(){
-	int DELAY = 200000;
+	int DELAY = 100000;
 	cout<<"	   BBBBBBB   OOOOOOOO   BBBBBBB	   "<<endl;
 	usleep(DELAY);
 	cout<<"	   B     B   O      O   B     B	   "<<endl;
