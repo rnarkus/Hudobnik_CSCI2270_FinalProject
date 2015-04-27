@@ -126,8 +126,24 @@ void Prog::deleteResp(string in_keyword, int index){
 void Prog::searchStr(string sentence){
 	// search through each word in sentence 
 	// output response based on keyword found
-	istringstream iss (sentence);
-	getline(iss, ranks, ' ');
+	LizaKey* found = NULL;
+	for (int i = 0; i < ARRAY_SIZE; i++){
+		LizaKey* entry = hashResp[i];
+		if (entry != NULL){
+			if(sentence.find(entry->keyword)){
+				found = &(*entry);
+			}
+			if(entry->next != NULL){
+				while(entry->next != NULL){
+					if(sentence.find((*entry).next->keyword)){
+						found = (*entry).next;
+					}
+					entry = (*entry).next;
+				}
+			}
+		}
+	}
+	displayResp(found->keyword);
 }
 
 void Prog::printResp(string in_keyword){
