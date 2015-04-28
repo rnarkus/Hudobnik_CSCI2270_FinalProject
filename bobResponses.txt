@@ -1,0 +1,30 @@
+happy#I'm so glad you're happy!
+happy#I am not happy.
+happy#Take advantage of your happiness, $name.
+sick#Awwwwww I am so sorry you're sick! Hope you feel better $name!!!
+sick#Should I call the doctor for you? Just kidding! I can't do that for you.
+sick#Don't die on me.
+tired#Get some sleep then!
+tired#Go to sleep right now. Forget your responsilibities, $name.
+tired#Good Night $name!
+homework#I can't do your homework for you.
+homework#Better start doing your homework, then.
+homework#Forget the homework! Talk to me instead.
+no problem#Everyone on this planet has some sort of problem
+no problem#Are you sure you have "no problem"?
+stress#Please relax and get some rest
+stress#Go chill
+thank#No problem
+thank#You are very very welcome
+thank#You don't need to thank me! Thank my creator.
+unknown#Please go on...
+unknown#I'm not sure what you're saying, I am quite dumb.
+unknown#Huh? What is that supposed to mean?
+unknown#Can you clarify a bit?
+unknown#uhhhh okay
+unknown#and????
+name#Hi, $name! How are you today?
+name#Hello, $name! What's up?
+name#Guten Tag, $name! Wie geht's?
+back#Welcome back $name!
+back#Welcome back $name! You were gone for so long :(
