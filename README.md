@@ -1,4 +1,4 @@
-#Bob the Smart(ish) AI 
+#Bob the Smart(ish) AI :man:
 
 Coded by Dieter Markus Hudobnik
 
