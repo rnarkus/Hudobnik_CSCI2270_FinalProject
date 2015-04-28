@@ -8,13 +8,11 @@
 using namespace std;
 
 Prog::Prog(){
-
 }
+
 Prog::~Prog(){
-	for (int i = 0; i < tableSize; i++)
-	{
-		if (hashTable[i] != NULL)
-		{
+	for (int i = 0; i < tableSize; i++){
+		if (hashTable[i] != NULL){
 			delete hashTable[i];
 		}
 	}
@@ -30,28 +28,20 @@ int Prog::hashSum(string x){
 }
 
 void Prog::insertResp(string in_keyword, string in_response){
-	int index = hashSum(in_keyword);
-	// If there is nothing in this location. 
-	if (hashTable[index] == NULL)
-	{
+	int index = hashSum(in_keyword); 
+	if (hashTable[index] == NULL){
 		hashTable[index] = new vector<LizaKey>;
 		hashTable[index]->push_back(LizaKey(in_keyword,in_response));
 	}
-
-	// If we need to add to a chain. 
-	else
-	{
-		for (int i = 0; i < hashTable[index]->size(); i++)
-		{
-			if ((*hashTable[index])[i].keyword == in_keyword)
-			{
+	else{
+		for (int i = 0; i < hashTable[index]->size(); i++){
+			if ((*hashTable[index])[i].keyword == in_keyword){
 				((*hashTable[index])[i].response.push_back(in_response));
 				return;
 			}
 		}
 		hashTable[index]->push_back(LizaKey(in_keyword, in_response));
 	}
-
 	return;
 }
 
@@ -68,57 +58,38 @@ LizaKey * Prog::findKey(string in_keyword){
 	bool found = false;
 	LizaKey *foundResp = NULL;
 
-	// If there is a node at this hash location. 
-	if (hashTable[index] != NULL)
-	{
-		// Loop through every vector index at this hash location. 
-		for (int i = 0; i < hashTable[index]->size(); i++)
-		{
-			// If we find the movie in the vector, delete it. 
-			if ((*hashTable[index])[i].keyword == in_keyword)
-			{
+	if (hashTable[index] != NULL){ 
+		for (int i = 0; i < hashTable[index]->size(); i++){
+			if ((*hashTable[index])[i].keyword == in_keyword){
 				foundResp = &(*hashTable[index])[i];
 				found = true;
 				break;
 			}
 		}
 	}
-	if (found == false)
-	{
+	if (found == false){
 		cout << "not found" << endl;
 	}
-
-		return foundResp;
-
+	return foundResp;
 }
 
 void Prog::deleteKey(string in_keyword){
 	int index = hashSum(in_keyword);
 	bool found = false;
-
-	// If there is a node at this hash location. 
-	if (hashTable[index] != NULL)
-	{
-		// Loop through every vector index at this hash location. 
-		for (int i = 0; i < hashTable[index]->size(); i++)
-		{
-			// If we find the movie in the vector, delete it. 
-			if ((*hashTable[index])[i].keyword == in_keyword)
-			{
+	if (hashTable[index] != NULL){
+		for (int i = 0; i < hashTable[index]->size(); i++){
+			if ((*hashTable[index])[i].keyword == in_keyword){
 				hashTable[index]->erase(hashTable[index]->begin() + i);
 				found = true;
 				break;
 			}
-		}
-		// If this was the last element in this chain, delete the vector. 
-		if (hashTable[index]->size() == 0)
-		{
+		} 
+		if (hashTable[index]->size() == 0){
 			delete hashTable[index];
 			hashTable[index] = NULL;
 		}
 	}
-	if (found == false)
-	{
+	if (found == false){
 		cout << "not found" << endl;
 	}
 	return;
@@ -139,11 +110,7 @@ void Prog::deleteResp(string in_keyword, int index){
 }
 
 void Prog::searchStr(string sentence){
-	// search through each word in sentence 
-	// output response based on keyword found
-
 	LizaKey *foundResp = NULL;
-
 	for (int i = 0; i < tableSize; i++){
 		if (hashTable[i] != NULL){
 			for (int j = 0; j < hashTable[i]->size(); j++){
@@ -160,8 +127,6 @@ void Prog::searchStr(string sentence){
 	else{
 		displayResp("unknown");
 	}
-
-
 }
 
 string Prog::Replace(string str, string oldStr, string newStr){
@@ -188,7 +153,6 @@ void Prog::printResp(string in_keyword){
 void Prog::printKey(){
 	cout << "Keywords:" << endl;
 	bool empty = true; 
-
 	for (int i = 0; i < tableSize; i++){
 		if (hashTable[i] != NULL){
 			for (int j = 0; j < hashTable[i]->size(); j++){
@@ -204,7 +168,6 @@ void Prog::printKey(){
 
 void Prog::printAllResps(){
 	bool empty = true; 
-
 	for (int i = 0; i < tableSize; i++){
 		if (hashTable[i] != NULL){
 			for (int j = 0; j < hashTable[i]->size(); j++){
