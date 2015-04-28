@@ -8,24 +8,16 @@
 using namespace std;
 
 Prog::Prog(){
-	ARRAY_SIZE = 10;
-	hashResp = new LizaKey*[ARRAY_SIZE];
-	for(int i = 0; i < ARRAY_SIZE; i++){
-		hashResp[i] = NULL;
-	}
+
 }
 Prog::~Prog(){
-	for (int i = 0; i < ARRAY_SIZE; i++)
-        if (hashResp[i] != NULL) {
-        LizaKey *prevEntry = NULL;
-        LizaKey *entry = hashResp[i];
-        while (entry != NULL) {
-            prevEntry = entry;
-            entry = entry->next;
-            delete prevEntry;
-        }
-    }
-    delete[] hashResp;
+	for (int i = 0; i < tableSize; i++)
+	{
+		if (hashTable[i] != NULL)
+		{
+			delete hashTable[i];
+		}
+	}
 }
 
 int Prog::hashSum(string x){
@@ -33,80 +25,103 @@ int Prog::hashSum(string x){
     for (int i = 0; i < x.length(); i++){
         sum =sum + x[i]; //ascii value of ith character in the string
     }
-    int hash = (sum % ARRAY_SIZE);
+    int hash = (sum % tableSize);
     return hash;
 }
 
 void Prog::insertResp(string in_keyword, string in_response){
-	int hash = hashSum(in_keyword);
-	LizaKey* entry = hashResp[hash];
-	LizaKey* newNode = new LizaKey(in_keyword, in_response);
-	if (hashResp[hash] == NULL){
-		hashResp[hash] = newNode;
+	int index = hashSum(in_keyword);
+	// If there is nothing in this location. 
+	if (hashTable[index] == NULL)
+	{
+		hashTable[index] = new vector<LizaKey>;
+		hashTable[index]->push_back(LizaKey(in_keyword,in_response));
 	}
-	else if (entry != NULL && entry->keyword == in_keyword){
-		entry->response.push_back(in_response);
-	}
-	else{
-    	while (entry->next !=NULL){
-    		entry = entry->next;
-    	}
-    	newNode->next = entry->next;
-    	entry->next= newNode;
-    }
-}
 
-int Prog::randNum(string in_keyword){
-	int hash = hashSum(in_keyword);
-	srand(time(NULL));
-	int randomIndex = rand() % hashResp[hash]->response.size();
-	return randomIndex;
+	// If we need to add to a chain. 
+	else
+	{
+		for (int i = 0; i < hashTable[index]->size(); i++)
+		{
+			if ((*hashTable[index])[i].keyword == in_keyword)
+			{
+				((*hashTable[index])[i].response.push_back(in_response));
+				return;
+			}
+		}
+		hashTable[index]->push_back(LizaKey(in_keyword, in_response));
+	}
+
+	return;
 }
 
 void Prog::displayResp(string in_keyword){
-	int index = randNum(in_keyword);
+	int hash = hashSum(in_keyword);
+	srand(time(NULL));
 	LizaKey *found = findKey(in_keyword);
-	cout << found->response[index] << endl;
+	int randomIndex = rand() % found->response.size();
+	cout << found->response[randomIndex] << endl;
 }
 
 LizaKey * Prog::findKey(string in_keyword){
-	int i = hashSum(in_keyword);
-	LizaKey* found = NULL;
-	LizaKey* entry = hashResp[i];
-	if (entry != NULL){
-		if(entry->keyword == in_keyword){
-			found = &(*entry);
-		}
-		if(entry->next != NULL){
-			while(entry->next != NULL){
-				if((*entry).next->keyword == in_keyword){
-					found = (*entry).next;
-				}
-				entry = (*entry).next;
+	int index = hashSum(in_keyword);
+	bool found = false;
+	LizaKey *foundResp = NULL;
+
+	// If there is a node at this hash location. 
+	if (hashTable[index] != NULL)
+	{
+		// Loop through every vector index at this hash location. 
+		for (int i = 0; i < hashTable[index]->size(); i++)
+		{
+			// If we find the movie in the vector, delete it. 
+			if ((*hashTable[index])[i].keyword == in_keyword)
+			{
+				foundResp = &(*hashTable[index])[i];
+				found = true;
+				break;
 			}
 		}
 	}
-	return found;
+	if (found == false)
+	{
+		cout << "not found" << endl;
+	}
+
+		return foundResp;
+
 }
 
-void Prog::deleteKey(string keyword){
-	int hash = hashSum(keyword);
-	bool check = true;
-	LizaKey *entry = hashResp[hash];
-	while(entry->next != NULL){
-		check = false;
-		if (entry->next->keyword == keyword){
-			LizaKey *temp = entry->next;
-			entry->next = entry->next->next;
-			delete temp;
+void Prog::deleteKey(string in_keyword){
+	int index = hashSum(in_keyword);
+	bool found = false;
+
+	// If there is a node at this hash location. 
+	if (hashTable[index] != NULL)
+	{
+		// Loop through every vector index at this hash location. 
+		for (int i = 0; i < hashTable[index]->size(); i++)
+		{
+			// If we find the movie in the vector, delete it. 
+			if ((*hashTable[index])[i].keyword == in_keyword)
+			{
+				hashTable[index]->erase(hashTable[index]->begin() + i);
+				found = true;
+				break;
+			}
 		}
-		else{
-			entry = entry->next;
+		// If this was the last element in this chain, delete the vector. 
+		if (hashTable[index]->size() == 0)
+		{
+			delete hashTable[index];
+			hashTable[index] = NULL;
 		}
 	}
-	if (entry->next == NULL  && check == true){
-		hashResp[hash] = NULL;
+	if (found == false)
+	{
+		cout << "not found" << endl;
 	}
+	return;
 }
 
 void Prog::deleteResp(string in_keyword, int index){
@@ -126,24 +141,36 @@ void Prog::deleteResp(string in_keyword, int index){
 void Prog::searchStr(string sentence){
 	// search through each word in sentence 
 	// output response based on keyword found
-	LizaKey* found = NULL;
-	for (int i = 0; i < ARRAY_SIZE; i++){
-		LizaKey* entry = hashResp[i];
-		if (entry != NULL){
-			if(sentence.find(entry->keyword)){
-				found = &(*entry);
-			}
-			if(entry->next != NULL){
-				while(entry->next != NULL){
-					if(sentence.find((*entry).next->keyword)){
-						found = (*entry).next;
-					}
-					entry = (*entry).next;
+
+	LizaKey *foundResp = NULL;
+
+	for (int i = 0; i < tableSize; i++){
+		if (hashTable[i] != NULL){
+			for (int j = 0; j < hashTable[i]->size(); j++){
+				if (sentence.find((*hashTable[i])[j].keyword) != std::string::npos){
+					foundResp = &(*hashTable[i])[j];
+					break;
 				}
 			}
 		}
 	}
-	displayResp(found->keyword);
+	if (foundResp != NULL){
+		displayResp(foundResp->keyword);
+	}
+	else{
+		displayResp("unknown");
+	}
+
+
+}
+
+string Prog::Replace(string str, string oldStr, string newStr){
+	size_t pos = 0;
+	while((pos = str.find(oldStr, pos)) != std::string::npos){
+		str.replace(pos, oldStr.length(), newStr);
+		pos += newStr.length();
+	}
+	return str;
 }
 
 void Prog::printResp(string in_keyword){
@@ -160,49 +187,36 @@ void Prog::printResp(string in_keyword){
 
 void Prog::printKey(){
 	cout << "Keywords:" << endl;
-	bool empty = true;
-	for (int i = 0; i < ARRAY_SIZE; i++){
-		LizaKey *entry = hashResp[i];
-		if (entry != NULL){
-			cout <<(*entry).keyword <<endl;
-			empty = false;
-			if(entry->next != NULL){
-				while(entry->next != NULL){
-					cout << (*entry).next->keyword << endl;
-					empty = false;
-					entry = (*entry).next;
-				}
+	bool empty = true; 
+
+	for (int i = 0; i < tableSize; i++){
+		if (hashTable[i] != NULL){
+			for (int j = 0; j < hashTable[i]->size(); j++){
+				cout << (*hashTable[i])[j].keyword << endl;
+				empty = false;
 			}
 		}
 	}
-	if (empty == true){
+	if (empty == true)
 		cout << "empty" << endl;
-	}
+	return;
 }
 
 void Prog::printAllResps(){
-	bool empty = true;
-	for (int i = 0; i < ARRAY_SIZE; i++){
-		LizaKey *entry = hashResp[i];
-		if (entry != NULL){
-			cout << "~~~" <<(*entry).keyword << "~~~" << endl;
-			for (int j = 0; j < (*entry).response.size(); j++){
-				cout << j <<". "<<(*entry).response[j] << endl;
-			}
-			empty = false;
-			if(entry->next != NULL){
-				while(entry->next != NULL){
-					cout << "~~~" <<(*entry).next->keyword << "~~~" << endl;
-					for (int k = 0; i < (*entry).next->response.size(); k++){
-						cout << k <<". "<<(*entry).next->response[k] << endl;
-					}
-					empty = false;
-					entry = (*entry).next;
+	bool empty = true; 
+
+	for (int i = 0; i < tableSize; i++){
+		if (hashTable[i] != NULL){
+			for (int j = 0; j < hashTable[i]->size(); j++){
+				cout << "~~~" <<(*hashTable[i])[j].keyword << "~~~" << endl;
+				for (int k = 0; k < (*hashTable[i])[j].response.size(); k++){
+					cout << k <<". "<<(*hashTable[i])[j].response[k] << endl;
 				}
+				empty = false;
 			}
 		}
 	}
-	if (empty == true){
+	if (empty == true)
 		cout << "empty" << endl;
-	}
+	return;
 }

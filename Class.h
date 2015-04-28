@@ -30,14 +30,14 @@ public:
     void deleteResp(std::string, int);
     void displayResp(std::string);
     void searchStr(std::string);
-    int randNum(std::string);
+    std::string Replace(std::string a, std::string b, std::string c);
     void printResp(std::string);
     void printKey();
     void printAllResps();
 protected:
 private:
-    LizaKey **hashResp;
-    int ARRAY_SIZE;
+    std::vector<LizaKey> *hashTable[10] = {NULL};
+    int tableSize = 10;
 };
 
 #endif // PROG_H
