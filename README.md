@@ -1,3 +1,7 @@
+#Bob the Smart(ish) AI 
+
+Coded by Dieter Markus Hudobnik
+
 **Project Summary** :tada: :fireworks:
 
 This program is an example of how to use Hashtables with an AI. it is very simple but uses your name and keywords that you type to get tailored responses back. Comes with an options menu to add in your own responses or just use the preloaded responses that come with the project. 
