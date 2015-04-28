@@ -10,17 +10,17 @@ To start, make sure you have all the latest software available. Next, check to s
 
 Instructions should be on screen.
 
-*Start by typing in your name (it can be your full name if you want).
+* Start by typing in your name (it can be your full name if you want).
 
-*then you can try out different responses
+* then you can try out different responses
 
-*Type in “I am very very sick today bob!” as an example. The keyword here is “sick”
+* Type in “I am very very sick today bob!” as an example. The keyword here is “sick”
 
-*You should get back a randomly generated response. Try this a few times and see the other responses for this keyword
+* You should get back a randomly generated response. Try this a few times and see the other responses for this keyword
 
-*Next try accessing the options menu by typing in “1”
+* Next try accessing the options menu by typing in “1”
 
-*You should see this
+* You should see this
 
 	=====Options:=====
 	1. Enter in extra responses for BOB to learn
@@ -29,7 +29,7 @@ Instructions should be on screen.
 	4. Delete a Response
 	5. Quit and return to program
 
-*Try out different options
+* Try out different options
 
 for example, number 4 will print a list of the keywords:
 
@@ -59,13 +59,13 @@ then type in a number. For this example, we will pick 0
 
 when you see the options display again, type in “2” to see the list of all keywords and responses. The one you deleted should not be there anymore.
 
-*Go back to the main program by typing “5”
+* Go back to the main program by typing “5”
 
-*Try out the program again using the keyword “sick”
+* Try out the program again using the keyword “sick”
 
-*You should not see that response you deleted in the random outputs. 
+* You should not see that response you deleted in the random outputs. 
 
-*Type in “quit” to quit the program.
+* Type in “quit” to quit the program.
 
 **Dependencies**
 
