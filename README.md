@@ -20,7 +20,7 @@ Instructions should be on screen.
 
 5. Next try accessing the options menu by typing in “1”
 
-6. You should see this:
+6. You should see this
 
 	=====Options:=====
 	1. Enter in extra responses for BOB to learn
@@ -83,9 +83,11 @@ iostream, fstream, and sstream, vector
 Tested and coded on Mac with C++11 pre installed and Command Line Tools 6.2 installed (version 6.3 has bugs, I will update this if 6.3 is fixed). Using SublimeText2 for my IDE.
 
 **Group Members**
+
 N/A
 
 **Contributors**
+
 N/A
 
 **Open issues/bugs**
