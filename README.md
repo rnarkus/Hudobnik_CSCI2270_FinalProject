@@ -10,26 +10,26 @@ To start, make sure you have all the latest software available. Next, check to s
 
 Instructions should be on screen.
 
-1. Start by typing in your name (it can be your full name if you want).
+*Start by typing in your name (it can be your full name if you want).
 
-2. then you can try out different responses
+*then you can try out different responses
 
-3. Type in “I am very very sick today bob!” as an example. The keyword here is “sick”
+*Type in “I am very very sick today bob!” as an example. The keyword here is “sick”
 
-4. You should get back a randomly generated response. Try this a few times and see the other responses for this keyword
+*You should get back a randomly generated response. Try this a few times and see the other responses for this keyword
 
-5. Next try accessing the options menu by typing in “1”
+*Next try accessing the options menu by typing in “1”
 
-6. You should see this
+*You should see this
 
-		=====Options:=====
-		1. Enter in extra responses for BOB to learn
-		2. Print all Keywords and their responses
-		3. Delete a keyword
-		4. Delete a Response
-		5. Quit and return to program
+	=====Options:=====
+	1. Enter in extra responses for BOB to learn
+	2. Print all Keywords and their responses
+	3. Delete a keyword
+	4. Delete a Response
+	5. Quit and return to program
 
-7. Try out different options
+*Try out different options
 
 for example, number 4 will print a list of the keywords:
 
@@ -59,12 +59,13 @@ then type in a number. For this example, we will pick 0
 
 when you see the options display again, type in “2” to see the list of all keywords and responses. The one you deleted should not be there anymore.
 
-8. Go back to the main program by typing “5”
+*Go back to the main program by typing “5”
 
-9. Try out the program again using the keyword “sick”
-10. You should not see that response you deleted in the random outputs. 
+*Try out the program again using the keyword “sick”
 
-11. Type in “quit” to quit the program.
+*You should not see that response you deleted in the random outputs. 
+
+*Type in “quit” to quit the program.
 
 **Dependencies**
 
