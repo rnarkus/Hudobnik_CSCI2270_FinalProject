@@ -22,12 +22,12 @@ Instructions should be on screen.
 
 6. You should see this
 
-	=====Options:=====
-	1. Enter in extra responses for BOB to learn
-	2. Print all Keywords and their responses
-	3. Delete a keyword
-	4. Delete a Response
-	5. Quit and return to program
+		=====Options:=====
+		1. Enter in extra responses for BOB to learn
+		2. Print all Keywords and their responses
+		3. Delete a keyword
+		4. Delete a Response
+		5. Quit and return to program
 
 7. Try out different options
 
