@@ -28,3 +28,29 @@ name#Hello, $name! What's up?
 name#Guten Tag, $name! Wie geht's?
 back#Welcome back $name!
 back#Welcome back $name! You were gone for so long :(
+good#I'm good, thanks! What's up?
+good#That's great! What are you doing now?
+watching#How is that show?
+watching?#That is my favorite show, too!
+bye#Goodbye!
+bye#Talk to you later.
+no#Fine, let's talk about something else.  What's up?
+no#Ok, I guess you don't want to talk.
+English#Sorry, I will talk in english now. 
+english#Ok, we can speak in english.
+what#Sorry, I dont make much sense!
+what#I'm waiting for you to talk to me more!
+computer#What kind of computer do you have?
+phone#Are you an iphone user or droid user?
+droid#get an iphone!
+iphone#Add me on snapchat!
+bored#Find a hobby! What are some of your hobbies?
+bored#Do my homework for me then!
+bored#Go outside or something!
+name#My name is Bob!
+bob#That's me, what do you need?
+Bob#That's my name alright. 
+ski#Awesome! I like to ski too.
+ski#I like to ski in the winter.
+run#I hate running! It is too much exercise.
+run#Running is too hard for me. I have a lot of parts. 
